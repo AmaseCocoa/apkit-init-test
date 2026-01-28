@@ -2,6 +2,8 @@ from apkit.nodeinfo.builder import NodeinfoBuilder
 from apkit.server.app import SubRouter
 from apkit.server.responses import ActivityResponse
 
+from .env import SOFTWARE
+
 sub = SubRouter()
 
 @sub.nodeinfo("/nodeinfo/2.0", "2.0")
@@ -10,7 +12,7 @@ async def nodeinfo_endpoint_v2():
     nodeinfo = (
         builder
         .set_software(
-            name="testpub",
+            name=SOFTWARE,
             version="1.2.3",
             repository=None,
             homepage=None,
@@ -25,7 +27,7 @@ async def nodeinfo_endpoint_v2():
             local_comments=0,
         )
         .set_open_registrations(False)
-        .set_metadata({"nodeName": "testpub"})
+        .set_metadata({"nodeName": SOFTWARE})
         .build()
     )
     return ActivityResponse(nodeinfo)
@@ -37,7 +39,7 @@ async def nodeinfo_endpoint():
     nodeinfo = (
         builder
         .set_software(
-            name="testpub",
+            name=SOFTWARE,
             version="1.2.3",
             repository=None,
             homepage=None,
@@ -52,7 +54,7 @@ async def nodeinfo_endpoint():
             local_comments=0,
         )
         .set_open_registrations(False)
-        .set_metadata({"nodeName": "testpub"})
+        .set_metadata({"nodeName": SOFTWARE})
         .build()
     )
     return ActivityResponse(nodeinfo)
